@@ -1,0 +1,717 @@
+\documentclass[a4paper,twoside,french]{article}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[french]{babel}
+\usepackage{times}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{xspace}
+\usepackage{multicol}
+\usepackage{array}
+\sloppy
+
+\addtolength{\topmargin}{-2cm}
+\addtolength{\textheight}{+3cm}
+\addtolength{\oddsidemargin}{-0,5cm}
+\setlength{\evensidemargin}{\oddsidemargin}
+\addtolength{\textwidth}{+3cm}
+
+%\renewcommand\section{\@startsection {section}{1}{\z@}%
+%	{-3.5ex \@plus -1ex \@minus -.2ex}%
+%	{2.3ex \ at plus.2ex}%
+%	{\reset@font\Large\bfseries}}
+
+\makeatletter
+\renewcommand\section{\@startsection
+  {section}{1}{1cm}%name, level, indent
+  {1.5\baselineskip}%             beforeskip
+  {1\baselineskip}%            afterskip
+  {\normalfont\Large\bfseries}}% style
+  
+\renewcommand\subsection{\@startsection
+  {subsection}{2}{2cm}%name, level, indent
+  {-\baselineskip}%             beforeskip
+  {0.3\baselineskip}%            afterskip
+  {\normalfont\normalsize\itshape\bfseries}}% style
+  
+\renewcommand\subsubsection{\@startsection
+  {subsubsection}{3}{2.5cm}%name, level, indent
+  {-\baselineskip}%             beforeskip
+  {0.3\baselineskip}%            afterskip
+  {\normalfont\normalsize\itshape\bfseries}}% style
+\makeatother
+
+
+\newcommand{\fiche}[1]{\cleardoublepage {\huge \centerline{\textbf{#1}}\centerline{~}}}
+
+
+\begin{document}
+  
+  \fiche{Découverte de Tor~: fiche \og émetteur\fg}
+
+  \pagestyle{empty}
+  \thispagestyle{empty}
+
+  \section{Votre rôle}
+
+  Vous êtes un \textbf{émetteur}. Vous représentez l'ordinateur d'un
+  utilisateur cherchant à communiquer avec un serveur web (le
+  \textbf{destinataire}) en passant par le réseau Tor. Vous devrez
+  pour cela faire transiter vos messages par un circuit Tor comprenant
+  un \textbf{n\oe ud d'entrée}, un \textbf{n\oe ud intermédiaire} et
+  un \textbf{n\oe ud de sortie}. Le destinataire devra pouvoir vous
+  faire parvenir une réponse par le même circuit.
+  
+  \section{Organisation}
+
+  \begin{multicols}{2}
+    Les participants sont répartis en cinq groupes~:
+    \begin{itemize}
+    \item Les émetteurs (dont vous faites partie)~;
+    \item Les n\oe uds d'entrée~;
+    \item Les n\oe uds intermédiaires~;
+    \item Les n\oe uds de sortie~;
+    \item Les destinataires.
+    \end{itemize}
+    \vfill\columnbreak
+
+    Vous disposez du matériel suivant~:
+    \begin{itemize}
+    \item Des enveloppes de grande taille~;
+    \item Des enveloppes de taille moyenne~;
+    \item Des enveloppes de petite taille~;
+    \item Des feuilles de papier entrant dans les petites enveloppes~;
+    \item Un crayon, une gomme~;
+    \item La présente fiche.
+    \end{itemize}
+  \end{multicols}
+
+  \section{Envoyer un message}
+
+  \subsection{Construire le circuit}
+
+  \begin{enumerate}
+  \item Choisir un n\oe ud d'entrée, un n\oe ud intermédiaire, un n\oe
+    ud de sortie et un destinataire~;
+  \item On suppose que vous partagez un secret (une clé de
+    chiffrement) avec chacun des n\oe uds Tor.
+  \end{enumerate}
+
+  \subsection{Préparer le message pour le destinataire}
+
+  \begin{enumerate}
+  \item Sur une feuille de papier, inscrivez \og Émetteur~:\fg en
+    laissant le champ vide, puis \og Destinataire~: \fg en indiquant
+    le nom du destinataire que vous avez choisi~;
+  \item Inscrivez \og Identifiant du flux TCP~: \og suivi d'un nombre
+    (assez grand) choisi au hasard (l'identifiant TCP est une notion
+    indépendante de Tor~: elle permet, dans un échange TCP, de faire
+    correspondre les messages envoyés et leurs réponses sans risque de
+    confusion)~;
+  \item Inscrivez un message pour le destinataire, par exemple une
+    question à laquelle il devra répondre. Ne donnez pas d'indication
+    quant à votre identité.
+  \end{enumerate}
+
+  \subsection{Préparer le message pour le n\oe ud de sortie}
+
+  Le message que vous avez écrit sera au final délivré par le n\oe ud
+  de sortie de votre circuit. Le message devra lui arriver chiffré,
+  et c'est lui qui le déchiffrera et le transmettra. En conséquence~:
+  \begin{enumerate}
+  \item Placez votre message dans une petite enveloppe~;
+  \item Inscrivez sur l'enveloppe \og chiffré avec la clé de~:\fg
+    suivi du nom de votre n\oe ud de sortie que vous avez choisi (ceci
+    simule le chiffrement avec la clé que vous partagez avec le n\oe
+    ud de sortie).
+  \end{enumerate}
+
+  \subsection{Préparer le message pour le n\oe ud intermédiaire}
+
+  \begin{enumerate}
+  \item Placez la petite enveloppe dans une enveloppe de taille
+    moyenne~;
+  \item Inscrivez sur l'enveloppe \og chiffré avec la clé de~:\fg suivi du
+    nom de votre n\oe ud intermédiaire.
+  \end{enumerate}
+
+  \subsection{Préparer le message pour le n\oe ud d'entrée}
+
+  \begin{enumerate}
+  \item Placez l'enveloppe de taille moyenne dans une grande
+    enveloppe~;
+  \item Inscrivez sur l'enveloppe \og chiffré avec la clé de~:\fg suivi du
+    nom de votre n\oe ud d'entrée.
+  \end{enumerate}
+
+  \subsection{Envoyer le message}
+
+  Donnez la grande enveloppe à votre n\oe ud d'entrée.
+
+  \section{Recevoir une réponse}
+
+  Normalement, le n\oe ud d'entrée devrait vous remettre une grande
+  enveloppe avec l'inscription \og chiffré avec la clé de~:\fg suivi de
+  votre nom.
+  \begin{enumerate}
+  \item Ouvrez la grande enveloppe (si elle est chiffrée avec une clé
+    que vous connaissez)~;
+  \item Ouvrez l'enveloppe moyenne (si elle est chiffrée avec une clé
+    que vous connaissez)~;
+  \item Ouvrez la petite enveloppe (si elle est chiffrée avec une clé
+    que vous connaissez)~;
+  \item Prenez connaissance de la réponse à votre message. Vérifiez
+    son émetteur et l'identifiant de flux TCP.
+  \end{enumerate}
+
+  \section{Conclusions}
+
+  \begin{itemize}
+  \item Parmi les divers acteurs avec lesquels vous avez communiqué,
+    lesquels connaissent votre identité~?
+  \item Parmi les divers acteurs avec lesquels vous avez communiqué,
+    lesquels connaissent l'identité du destinataire~?
+  \item Parmi les divers acteurs avec lesquels vous avez communiqué,
+    lesquels connaissent le contenu du message et de sa réponse~?
+  \item Que faudrait-il changer aux manipulations que vous avez
+    effectuées si vous souhaitiez mettre en place un chiffrement dit
+    \og de bout en bout\fg entre votre destinataire et vous (comme
+    dans le cas d'une communication HTTPS)~?
+  \end{itemize}
+  
+  \fiche{Découverte de Tor~: fiche \og n\oe ud d'entrée\fg}
+
+  \section{Votre rôle}
+
+  Vous êtes un \textbf{n\oe ud d'entrée}. Vous représentez un serveur
+  participant au projet Tor, destiné à être en contact direct avec les
+  utilisateurs (\textbf{émetteurs}) en tant que premier élément du
+  circuit qu'ils auront choisi pour joindre le
+  \textbf{destinataire}. Votre rôle est de faire transiter les messages
+  de l'émetteur au destinataire via un \textbf{n\oe ud intermédiaire}
+  et un \textbf{n\oe ud de sortie}. De même, vous serez amené à
+  transmettre les réponses du destinataire à l'émetteur par le même
+  chemin.
+  
+  \section{Organisation}
+
+  \begin{multicols}{2}
+    Les participants sont répartis en cinq groupes~:
+    \begin{itemize}
+    \item Les émetteurs~;
+    \item Les n\oe uds d'entrée (dont vous faites partie)~;
+    \item Les n\oe uds intermédiaires~;
+    \item Les n\oe uds de sortie~;
+    \item Les destinataires.
+    \end{itemize}
+    \vfill\columnbreak
+
+    Vous disposez du matériel suivant~:
+    \begin{itemize}
+    \item Des enveloppes de grande taille (optionnel)~;
+    % \item Des enveloppes de taille moyenne~;
+    % \item Des enveloppes de petite taille~;
+    % \item Des feuilles de papier entrant dans les petites enveloppes~;
+    \item Un crayon, une gomme~;
+    \item La présente fiche.
+    \end{itemize}
+  \end{multicols}
+
+  \section{Transmettre un message de l'émetteur}
+
+  Un enveloppe représente le chiffrement utilisé pour protéger un
+  message, et seules les personnes possédant la clé de déchiffrement
+  peuvent l'ouvrir. On suppose que l'émetteur possède une copie de
+  votre clé.
+
+  Un émetteur peut choisir de vous transmettre un message sous la
+  forme d'une enveloppe de grande taille.
+
+  \begin{enumerate}
+  \item Vérifiez que vous êtes bien identifié comme pouvant ouvrir
+    cette enveloppe (il doit y avoir indiqué \og chiffré avec la clé
+    de~: \ldots\fg sur l'enveloppe)~;
+  \item Ouvrez l'enveloppe et sortez-en une enveloppe de taille
+    moyenne (cela simule le déchiffrement de la couche extérieure du
+    chiffrement en oignon)~;
+  \item Prenez connaissance de l'identité du n\oe ud Tor capable de
+    déchiffrer l'enveloppe de taille moyenne~;
+  \item Attribuez à cette association entre l'émetteur et le n\oe ud
+    désigné un \textbf{numéro de circuit} que vous conserverez dans le
+    tableau suivant (à moins que cette association ne vous soit déjà
+    connue)~:
+    \begin{center}
+      \begin{tabular}{|m{3cm}|m{3cm}|m{4cm}|}
+        \hline
+        Émetteur & N\oe ud intermédiaire &  Numéro de circuit attribué \\
+        \hline
+        & & \\
+        & & \\
+        \hline
+        & & \\
+        & & \\
+        \hline
+        & & \\
+        & & \\
+        \hline
+        & & \\
+        & & \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \item Inscrivez sur l'enveloppe de taille moyenne \og numéro de
+    circuit~:\fg suivi de ce numéro~;
+  \item Transmettez l'enveloppe de taille moyenne au n\oe ud
+    intermédiaire désigné~;
+  \item Effacez les inscriptions sur l'enveloppe de grande taille et
+    conservez-la pour une utilisation ultérieure.
+  \end{enumerate}
+
+
+  \section{Transmettre un message provenant d'un autre n\oe ud Tor}
+
+  Un n\oe ud intermédiaire peut vous transmettre une enveloppe de
+  taille moyenne, qui correspond à une réponse en train d'être
+  acheminée depuis un destinataire vers un émetteur. Comme vous pouvez
+  participer à plusieurs circuits simultanément, le tableau que vous
+  avez construit vous aidera à identifier l'émetteur concerné.
+
+  \begin{enumerate}
+  \item Vérifiez que le n\oe ud qui vous transmet l'enveloppe et le
+    numéro de circuit qui est inscrit dessus correspond bien à l'une
+    des lignes de votre tableau~;
+  \item Identifiez l'émetteur grâce au tableau~;
+  \item Placez l'enveloppe de taille moyenne dans une enveloppe de
+    grande taille en inscrivant dessus \og chiffré avec la clé de~:
+    \fg suivi de votre nom~;
+  \item Transmettez l'enveloppe à l'émetteur.
+  \end{enumerate}
+
+  \section{Conclusions}
+
+  \begin{itemize}
+  \item En tant que n\oe ud d'entrée, pouvez-vous identifier
+    l'émetteur d'un échange de messages~?
+  \item En tant que n\oe ud d'entrée, pouvez-vous identifier
+    le récepteur d'un échange de messages~?
+  \item Pouvez-vous identifier le n\oe ud intermédiaire du circuit~?
+  \item Pouvez-vous identifier le n\oe ud de sortie du circuit~?
+  \item En tant que n\oe ud d'entrée, connaissez-vous le contenu d'un
+    échange de messages~?
+  \item Qu'est-ce qui changera pour vous si l'émetteur décide
+    d'utiliser, en plus de Tor, un chiffrement dit \og de bout en
+    bout\fg entre lui et le destinataire (comme dans le cas d'une
+    communication HTTPS)~?
+  \item Quel est l'intérêt des numéros de circuits~? Pourrait-on s'en
+    passer~? Pourquoi~?
+  \end{itemize}
+  
+  \fiche{Découverte de Tor~: fiche \og n\oe ud intermédiaire\fg}
+
+  \section{Votre rôle}
+
+  Vous êtes un \textbf{n\oe ud intermédiaire}. Vous représentez un
+  serveur participant au projet Tor et destiné à participer à un
+  circuit Tor. Votre rôle est de passer à un \textbf{n\oe ud de sortie}
+  des messages provenant d'un \textbf{n\oe ud d'entrée}. Ces messages
+  sont rédigés par un \textbf{émetteur} et adressés à un
+  \textbf{destinataire}, tous deux situés hors du circuit Tor. De
+  même, vous serez amené à transmettre les réponses du destinataire à
+  l'émetteur par le même chemin.
+  
+  \section{Organisation}
+
+  \begin{multicols}{2}
+    Les participants sont répartis en cinq groupes~:
+    \begin{itemize}
+    \item Les émetteurs~;
+    \item Les n\oe uds d'entrée~;
+    \item Les n\oe uds intermédiaires (dont vous faites partie)~;
+    \item Les n\oe uds de sortie~;
+    \item Les destinataires.
+    \end{itemize}
+    \vfill\columnbreak
+
+    Vous disposez du matériel suivant~:
+    \begin{itemize}
+    \item Des enveloppes de taille moyenne (optionnel)~;
+    % \item Des enveloppes de taille moyenne~;
+    % \item Des enveloppes de petite taille~;
+    % \item Des feuilles de papier entrant dans les petites enveloppes~;
+    \item Un crayon, une gomme~;
+    \item La présente fiche.
+    \end{itemize}
+  \end{multicols}
+
+  \section{Transmettre un message provenant d'un n\oe ud d'entrée}
+
+  Un enveloppe représente le chiffrement utilisé pour protéger un
+  message, et seules les personnes possédant la clé de déchiffrement
+  peuvent l'ouvrir. On suppose que l'émetteur possède une copie de
+  votre clé.
+
+  Un n\oe ud d'entrée peut être amené à vous transmettre un message,
+  sous la forme d'une enveloppe de taille moyenne.
+
+  \begin{enumerate}
+  \item Vérifiez que vous êtes bien identifié comme pouvant ouvrir
+    cette enveloppe (il doit y avoir indiqué \og chiffré avec la clé
+    de~: \ldots\fg sur l'enveloppe)~;
+  \item Notez le numéro de circuit indiqué sur l'enveloppe et regardez
+    dans le tableau ci-dessous si le couple (n\oe ud d'entrée - numéro
+    de circuit amont) est déjà présent.\\
+    \textbf{Si c'est le cas~:}
+    \begin{enumerate}
+    \item Ouvrez l'enveloppe et sortez-en une enveloppe de petite
+      taille (cela simule le déchiffrement de la couche intermédiaire
+      du chiffrement en oignon)~;
+    \item Prenez connaissance de l'identité du n\oe ud Tor capable de
+      déchiffrer l'enveloppe de petite taille et vérifiez qu'il
+      correspond bien à la ligne du tableau que vous avez identifiée~;
+    \item Inscrivez sur l'enveloppe de petite taille \og numéro de
+      circuit~:\fg suivi du numéro de circuit aval correspondant dans
+      le tableau~;
+    \item Transmettez l'enveloppe de petite taille au n\oe ud de
+      sortie désigné~;
+    \item Effacez les inscriptions sur l'enveloppe de taille moyenne
+      et conservez-la pour une utilisation ultérieure.
+    \end{enumerate}
+    \textbf{Si ce n'est pas le cas~:}
+    \begin{enumerate}
+    \item Ajoutez une entrée dans le tableau en renseignant les deux
+      premières colonnes avec ces informations~;
+    \item Ouvrez l'enveloppe et sortez-en une enveloppe de petite
+      taille (cela simule le déchiffrement de la couche intermédiaire
+      du chiffrement en oignon)~;
+    \item Prenez connaissance de l'identité du n\oe ud Tor capable de
+      déchiffrer l'enveloppe de petite taille~;
+    \item Attribuez un numéro de circuit unique et renseignez les deux
+      dernières colonnes du tableau~;
+    \item Inscrivez sur l'enveloppe de petite taille \og numéro de
+      circuit~:\fg suivi du numéro de circuit aval que vous venez de
+      choisir~;
+    \item Transmettez l'enveloppe de petite taille au n\oe ud de
+      sortie désigné~;
+    \item Effacez les inscriptions sur l'enveloppe de taille moyenne
+      et conservez-la pour une utilisation ultérieure.
+    \end{enumerate}
+  \end{enumerate}
+  \begin{center}
+    \begin{tabular}{|m{2.5cm}|m{3.5cm}|m{2.5cm}|m{3.5cm}|}
+      \hline
+      N\oe ud d'entrée & Numéro de circuit amont &  N\oe ud de sortie & Numéro de circuit aval \\
+      \hline
+      & & & \\
+      & & & \\
+      \hline
+      & & & \\
+      & & & \\
+      \hline
+      & & & \\
+      & & & \\
+      \hline
+      & & & \\
+      & & & \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+
+  \section{Transmettre un message provenant d'un n\oe ud de sortie}
+
+  Un n\oe ud de sortie peut vous transmettre une enveloppe de
+  petite taille, qui correspond à une réponse en train d'être
+  acheminée depuis un destinataire vers un émetteur. Comme vous pouvez
+  participer à plusieurs circuits simultanément, le tableau que vous
+  avez construit vous aidera à identifier l'émetteur concerné.
+
+  \begin{enumerate}
+  \item Vérifiez que le n\oe ud de sortie qui vous transmet
+    l'enveloppe et le numéro de circuit qui est inscrit dessus
+    correspond bien au couple (n\oe ud de sortie, numéro de circuit
+    aval) de l'une des lignes de votre tableau~;
+  \item Identifiez le n\oe ud d'entrée et le numéro de circuit amont
+    correspondants grâce au tableau~;
+  \item Placez l'enveloppe de petite taille dans une enveloppe de
+    taille moyenne en inscrivant dessus \og chiffré avec la clé de~:
+    \fg suivi de votre identité~;
+  \item Inscrivez sur l'enveloppe de taille moyenne \og numéro de
+    circuit~:\fg suivi du numéro de circuit amont que vous venez
+    d'identifier~;
+  \item Transmettez l'enveloppe au n\oe ud d'entrée que vous avez
+    identifié.
+  \end{enumerate}
+
+  \section{Conclusions}
+
+  \begin{itemize}
+  \item En tant que n\oe ud intermédiaire, pouvez-vous identifier
+    l'émetteur d'un échange de messages~?
+  \item En tant que n\oe ud intermédiaire, pouvez-vous identifier
+    le destinataire d'un échange de messages~?
+  \item Pouvez-vous identifier le n\oe ud d'entrée du circuit~?
+  \item Pouvez-vous identifier le n\oe ud de sortie du circuit~?
+  \item Que devrions-nous changer dans le protocole pour modifier la
+    réponse aux deux questions précédentes~?
+  \item En tant que n\oe ud intermédiaire, connaissez-vous le contenu
+    d'un échange de messages~?
+  \item Qu'est-ce qui changera pour vous si l'émetteur décide
+    d'utiliser, en plus de Tor, un chiffrement dit \og de bout en
+    bout\fg entre lui et le destinataire (comme dans le cas d'une
+    communication HTTPS)~?
+  \item Quel est l'intérêt des numéros de circuits~? Pourrait-on s'en
+    passer~? Pourquoi~?
+  \end{itemize}
+  
+  \fiche{Découverte de Tor~: fiche \og n\oe ud de sortie\fg}
+
+  \section{Votre rôle}
+
+  Vous êtes un \textbf{n\oe ud de sortie}. Vous représentez un serveur
+  participant au projet Tor et destiné à participer à un circuit
+  Tor. Votre rôle est de faire sortir un message (passé par un
+  \textbf{n\oe ud intermédiaire}) du circuit Tor et de le remettre à
+  son \textbf{destinataire}. Ce message provient initialement d'un
+  \textbf{émetteur}, qui l'a fait transiter par un \textbf{n\oe ud
+    d'entrée}. De même, vous serez amené à transmettre les réponses du
+  destinataire à l'émetteur par le même chemin.
+  
+  \section{Organisation}
+
+  \begin{multicols}{2}
+    Les participants sont répartis en cinq groupes~:
+    \begin{itemize}
+    \item Les émetteurs~;
+    \item Les n\oe uds d'entrée~;
+    \item Les n\oe uds intermédiaires~;
+    \item Les n\oe uds de sortie (dont vous faites partie)~;
+    \item Les destinataires.
+    \end{itemize}
+    \vfill\columnbreak
+
+    Vous disposez du matériel suivant~:
+    \begin{itemize}
+    \item Des enveloppes de petite taille (optionnel)~;
+    % \item Des enveloppes de taille moyenne~;
+    % \item Des enveloppes de petite taille~;
+    % \item Des feuilles de papier entrant dans les petites enveloppes~;
+    \item Un crayon, une gomme~;
+    \item La présente fiche.
+    \end{itemize}
+  \end{multicols}
+
+  \section{Transmettre un message provenant d'un n\oe ud intermédiaire}
+
+  Un enveloppe représente le chiffrement utilisé pour protéger un
+  message, et seules les personnes possédant la clé de déchiffrement
+  peuvent l'ouvrir. On suppose que l'émetteur possède une copie de
+  votre clé.
+
+  Un n\oe ud intermédiaire peut être amené à vous transmettre un
+  message, sous la forme d'une enveloppe de petite taille.
+
+  \begin{enumerate}
+  \item Vérifiez que vous êtes bien identifié comme pouvant ouvrir
+    cette enveloppe (il doit y avoir indiqué \og chiffré avec la clé
+    de~: \ldots\fg sur l'enveloppe)~;
+  \item Notez le numéro de circuit indiqué sur l'enveloppe et regardez
+    dans le tableau ci-dessous si le couple (n\oe ud intermédiaire -
+    numéro de circuit) est déjà présent.\\
+    \textbf{Si c'est le cas~:}
+    \begin{enumerate}
+    \item Ouvrez l'enveloppe et sortez-en le message (cela simule le
+      déchiffrement de la couche interne du chiffrement en oignon)~;
+    \item Prenez connaissance de l'identité du destinataire et
+      vérifiez qu'il correspond bien à la ligne du tableau que vous
+      avez identifiée~;
+    \item Vérifiez que l'identifiant du flux TCP indiqué sur le
+      message correspond bien à cette entrée du tableau, sinon
+      ajoutez-le (une même ligne peut contenir plusieurs identifiants
+      TCP)~;
+    \item Renseignez le champ \og émetteur~:\fg du message avec votre
+      propre identité~;
+    \item Transmettez le message au destinataire~;
+    \item Effacez les inscriptions sur l'enveloppe de petite taille et
+      conservez-la pour une utilisation ultérieure.
+    \end{enumerate}
+    \textbf{Si ce n'est pas le cas~:}
+    \begin{enumerate}
+    \item Ajoutez une entrée dans le tableau en renseignant les deux
+      premières colonnes avec ces informations~;
+    \item Ouvrez l'enveloppe et sortez-en le message (cela simule le
+      déchiffrement de la couche interne du chiffrement en oignon)~;
+    \item Prenez connaissance de l'identité du destinataire et de
+      l'identifiant de flux TCP du message (l'identifiant TCP est une
+      notion indépendante de Tor~: elle permet, dans un échange TCP,
+      de faire correspondre les messages envoyés et leurs réponses
+      sans risque de confusion)~;
+    \item Renseignez les deux dernières colonnes du tableau avec ces
+      informations~;
+    \item Renseignez le champ \og émetteur~:\fg du message avec votre
+      propre identité~;
+    \item Transmettez le message au destinataire~;
+    \item Effacez les inscriptions sur l'enveloppe de petite taille et
+      conservez-la pour une utilisation ultérieure.
+    \end{enumerate}
+  \end{enumerate}
+  \begin{center}
+    \begin{tabular}{|m{3cm}|m{3cm}|m{3cm}|m{3cm}|}
+      \hline
+      N\oe ud intermédiaire & Numéro de circuit &  Destinataire & Identifiant TCP \\
+      \hline
+      & & & \\
+      & & & \\
+      \hline
+      & & & \\
+      & & & \\
+      \hline
+      & & & \\
+      & & & \\
+      \hline
+      & & & \\
+      & & & \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+
+  \section{Transmettre un message provenant d'un destinataire}
+
+  Un destinataire peut vous faire parvenir une réponse au message que
+  vous lui avez transmis. Comme le destinataire et vous pouvez
+  participer à plusieurs flux d'informations simultanément, le tableau
+  que vous avez construit vous aidera à identifier l'émetteur
+  concerné.
+
+  \begin{enumerate}
+  \item Vérifiez que le destinataire qui vous transmet l'enveloppe et
+    l'identifiant TCP qui est inscrit dessus correspondent bien au couple
+    (destinataire, identifiant TCP) de l'une des lignes de votre
+    tableau~;
+  \item Identifiez le n\oe ud intermédiaire et le numéro de circuit
+    correspondants grâce au tableau~;
+  \item Placez le message dans une enveloppe de petite taille en
+    inscrivant dessus \og chiffré avec la clé de~: \fg suivi de votre
+    identité~;
+  \item Inscrivez sur l'enveloppe de petite taille \og numéro de
+    circuit~:\fg suivi du numéro de circuit que vous venez
+    d'identifier~;
+  \item Transmettez l'enveloppe au n\oe ud intermédiaire que vous avez
+    identifié.
+  \end{enumerate}
+
+  \section{Conclusions}
+
+  \begin{itemize}
+  \item En tant que n\oe ud de sortie, pouvez-vous identifier
+    l'émetteur d'un échange de messages~?
+  \item En tant que n\oe ud de sortie, pouvez-vous identifier
+    le destinataire d'un échange de messages~?
+  \item Pouvez-vous identifier le n\oe ud d'entrée du circuit~?
+  \item Pouvez-vous identifier le n\oe ud intermédiaire du circuit~?
+  \item En tant que n\oe ud intermédiaire, connaissez-vous le contenu
+    d'un échange de messages~?
+  \item Qu'est-ce qui changera pour vous si l'émetteur décide
+    d'utiliser, en plus de Tor, un chiffrement dit \og de bout en
+    bout\fg entre lui et le destinataire (comme dans le cas d'une
+    communication HTTPS)~?
+  \item Quel est l'intérêt des numéros de circuits et des identifiants
+    TCP~? Pourrait-on s'en passer~? Pourquoi~?
+  \end{itemize}
+  
+  \fiche{Découverte de Tor~: fiche \og destinataire\fg}
+
+  \section{Votre rôle}
+
+  Vous êtes le \textbf{destinataire} d'un message, composé par un
+  \textbf{émetteur} qui souhaite le faire transiter par un circuit
+  Tor. Il le transmettra à un \textbf{n\oe ud d'entrée}, puis à un
+  \textbf{n\oe ud intermédiaire}, puis à un \textbf{n\oe ud de
+    sortie}, qui vous l'enverra directement. De même, vous serez amené
+  à envoyer vos réponses à l'émetteur par le même chemin.
+  
+  \section{Organisation}
+
+  \begin{multicols}{2}
+    Les participants sont répartis en cinq groupes~:
+    \begin{itemize}
+    \item Les émetteurs~;
+    \item Les n\oe uds d'entrée~;
+    \item Les n\oe uds intermédiaires~;
+    \item Les n\oe uds de sortie~;
+    \item Les destinataires (dont vous faites partie).
+    \end{itemize}
+    \vfill\columnbreak
+
+    Vous disposez du matériel suivant~:
+    \begin{itemize}
+    %\item Des enveloppes de petite taille (optionnel)~;
+    % \item Des enveloppes de taille moyenne~;
+    % \item Des enveloppes de petite taille~;
+    \item Des feuilles de papier entrant dans les petites enveloppes~;
+    \item Un crayon, une gomme~;
+    \item La présente fiche.
+    \end{itemize}
+  \end{multicols}
+
+  \section{Transmettre un message provenant d'un n\oe ud de sortie}
+
+  Un enveloppe représente le chiffrement utilisé pour protéger un
+  message, et seules les personnes possédant la clé de chiffrement
+  peuvent l'ouvrir. Dans cette version de l'exercice, vous n'aurez pas
+  à manipuler d'enveloppe.
+
+  Un n\oe ud de sortie peut être amené à vous transmettre un
+  message.
+
+  \begin{enumerate}
+  \item Vérifiez que vous êtes bien identifié comme le destinataire de
+    ce message, et prenez connaissance de son émetteur~;
+  \item Notez l'identifiant TCP indiqué sur l'enveloppe~;
+  \item Sur une nouvelle feuille, indiquez \og émetteur~:\fg suivi de
+    votre identité, \og destinataire~:\fg suivi de l'identité de
+    l'émetteur du message que vous venez de recevoir et \og
+    identifiant TCP~:\fg suivi du numéro présent sur le message que
+    vous venez de recevoir~;
+  \item Écrivez une réponse au message~;
+  \item Transmettez votre message au destinataire que vous avez
+    identifié, à savoir le n\oe ud de sortie qui vous l'a transmis.
+  \end{enumerate}
+
+  \section{Conclusions}
+
+  \begin{itemize}
+  \item En tant que destinataire, pouvez-vous identifier
+    l'émetteur d'un échange de messages~?
+  \item En tant que destinataire, connaissez-vous le contenu du
+    message~?
+  \item Pouvez-vous identifier le n\oe ud d'entrée du circuit Tor~?
+  \item Pouvez-vous identifier le n\oe ud intermédiaire du circuit Tor~?
+  \item Pouvez-vous identifier le n\oe ud de sortie du circuit Tor~?
+  \item Qu'est-ce qui pourrait vous permettre de savoir que la
+    personne qui vous a transmis le message n'est pas celle qui l'a
+    rédigée~?
+  \item Qu'est-ce qui pourrait vous permettre de savoir que le message
+    est passé par un circuit Tor~?
+  \item Qu'est-ce qui changera pour vous si l'émetteur décide
+    d'utiliser, en plus de Tor, un chiffrement dit \og de bout en
+    bout\fg entre lui et vous (comme dans le cas d'une
+    communication HTTPS)~?
+  \item Quel est l'intérêt de l'identifiant TCP~? Pourrait-on s'en
+    passer~? Pourquoi~?
+  \end{itemize}
+
+  
+		
+  %\bibliographystyle{alpha}
+  %\bibliography{biblio}
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% ispell-local-dictionary: "francais"
+%%% End: 

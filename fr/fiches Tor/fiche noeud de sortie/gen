@@ -1,5 +1,0 @@
-#!/bin/bash
-
-make clean
-make fiche.pdf
-make cleanlog
