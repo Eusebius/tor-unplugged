@@ -1,0 +1,196 @@
+\documentclass[a4paper,twoside,french]{article}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[french]{babel}
+\usepackage{times}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{xspace}
+\usepackage{multicol}
+\sloppy
+
+\addtolength{\topmargin}{-2cm}
+\addtolength{\textheight}{+3cm}
+\addtolength{\oddsidemargin}{-0,5cm}
+\setlength{\evensidemargin}{\oddsidemargin}
+\addtolength{\textwidth}{+3cm}
+
+%\renewcommand\section{\@startsection {section}{1}{\z@}%
+%	{-3.5ex \@plus -1ex \@minus -.2ex}%
+%	{2.3ex \ at plus.2ex}%
+%	{\reset@font\Large\bfseries}}
+
+\makeatletter
+\renewcommand\section{\@startsection
+  {section}{1}{1cm}%name, level, indent
+  {1.5\baselineskip}%             beforeskip
+  {1\baselineskip}%            afterskip
+  {\normalfont\Large\bfseries}}% style
+  
+\renewcommand\subsection{\@startsection
+  {subsection}{2}{2cm}%name, level, indent
+  {-\baselineskip}%             beforeskip
+  {0.3\baselineskip}%            afterskip
+  {\normalfont\normalsize\itshape\bfseries}}% style
+  
+\renewcommand\subsubsection{\@startsection
+  {subsubsection}{3}{2.5cm}%name, level, indent
+  {-\baselineskip}%             beforeskip
+  {0.3\baselineskip}%            afterskip
+  {\normalfont\normalsize\itshape\bfseries}}% style
+\makeatother
+
+
+
+\begin{document}
+  
+  \title{Découverte de Tor~: fiche \og émetteur\fg}
+  %\author{Guillaume Piolle}
+  %\date{2010}
+  \date{}
+
+  \maketitle
+  \pagestyle{empty}
+  \thispagestyle{empty}
+
+  \section{Votre rôle}
+
+  Vous êtes un \textbf{émetteur}. Vous représentez l'ordinateur d'un
+  utilisateur cherchant à communiquer avec un serveur web (le
+  \textbf{destinataire}) en passant par le réseau Tor. Vous devrez
+  pour cela faire transiter vos messages par un circuit Tor comprenant
+  un \textbf{n\oe ud d'entrée}, un \textbf{n\oe ud intermédiaire} et
+  un \textbf{n\oe ud de sortie}. Le destinataire devra pouvoir vous
+  faire parvenir une réponse par le même circuit.
+  
+  \section{Organisation}
+
+  \begin{multicols}{2}
+    Les participants sont répartis en cinq groupes~:
+    \begin{itemize}
+    \item Les émetteurs (dont vous faites partie)~;
+    \item Les n\oe uds d'entrée~;
+    \item Les n\oe uds intermédiaires~;
+    \item Les n\oe uds de sortie~;
+    \item Les destinataires.
+    \end{itemize}
+    \vfill\columnbreak
+
+    Vous disposez du matériel suivant~:
+    \begin{itemize}
+    \item Des enveloppes de grande taille~;
+    \item Des enveloppes de taille moyenne~;
+    \item Des enveloppes de petite taille~;
+    \item Des feuilles de papier entrant dans les petites enveloppes~;
+    \item Un crayon, une gomme~;
+    \item La présente fiche.
+    \end{itemize}
+  \end{multicols}
+
+  \section{Envoyer un message}
+
+  \subsection{Construire le circuit}
+
+  \begin{enumerate}
+  \item Choisir un n\oe ud d'entrée, un n\oe ud intermédiaire, un n\oe
+    ud de sortie et un destinataire~;
+  \item On suppose que vous partagez un secret (une clé de
+    chiffrement) avec chacun des n\oe uds Tor.
+  \end{enumerate}
+
+  \subsection{Préparer le message pour le destinataire}
+
+  \begin{enumerate}
+  \item Sur une feuille de papier, inscrivez \og Émetteur~:\fg en
+    laissant le champ vide, puis \og Destinataire~: \fg en indiquant
+    le nom du destinataire que vous avez choisi~;
+  \item Inscrivez \og Identifiant du flux TCP~: \og suivi d'un nombre
+    (assez grand) choisi au hasard (l'identifiant TCP est une notion
+    indépendante de Tor~: elle permet, dans un échange TCP, de faire
+    correspondre les messages envoyés et leurs réponses sans risque de
+    confusion)~;
+  \item Inscrivez un message pour le destinataire, par exemple une
+    question à laquelle il devra répondre. Ne donnez pas d'indication
+    quant à votre identité.
+  \end{enumerate}
+
+  \subsection{Préparer le message pour le n\oe ud de sortie}
+
+  Le message que vous avez écrit sera au final délivré par le n\oe ud
+  de sortie de votre circuit. Le message devra lui arriver chiffré,
+  et c'est lui qui le déchiffrera et le transmettra. En conséquence~:
+  \begin{enumerate}
+  \item Placez votre message dans une petite enveloppe~;
+  \item Inscrivez sur l'enveloppe \og chiffré avec la clé de~:\fg
+    suivi du nom de votre n\oe ud de sortie que vous avez choisi (ceci
+    simule le chiffrement avec la clé que vous partagez avec le n\oe
+    ud de sortie).
+  \end{enumerate}
+
+  \subsection{Préparer le message pour le n\oe ud intermédiaire}
+
+  \begin{enumerate}
+  \item Placez la petite enveloppe dans une enveloppe de taille
+    moyenne~;
+  \item Inscrivez sur l'enveloppe \og chiffré avec la clé de~:\fg suivi du
+    nom de votre n\oe ud intermédiaire.
+  \end{enumerate}
+
+  \subsection{Préparer le message pour le n\oe ud d'entrée}
+
+  \begin{enumerate}
+  \item Placez l'enveloppe de taille moyenne dans une grande
+    enveloppe~;
+  \item Inscrivez sur l'enveloppe \og chiffré avec la clé de~:\fg suivi du
+    nom de votre n\oe ud d'entrée.
+  \end{enumerate}
+
+  \subsection{Envoyer le message}
+
+  Donnez la grande enveloppe à votre n\oe ud d'entrée.
+
+  \section{Recevoir une réponse}
+
+  Normalement, le n\oe ud d'entrée devrait vous remettre une grande
+  enveloppe avec l'inscription \og chiffré avec la clé de~:\fg suivi de
+  votre nom.
+  \begin{enumerate}
+  \item Ouvrez la grande enveloppe (si elle est chiffrée avec une clé
+    que vous connaissez)~;
+  \item Ouvrez l'enveloppe moyenne (si elle est chiffrée avec une clé
+    que vous connaissez)~;
+  \item Ouvrez la petite enveloppe (si elle est chiffrée avec une clé
+    que vous connaissez)~;
+  \item Prenez connaissance de la réponse à votre message. Vérifiez
+    son émetteur et l'identifiant de flux TCP.
+  \end{enumerate}
+
+  \section{Conclusions}
+
+  \begin{itemize}
+  \item Parmi les divers acteurs avec lesquels vous avez communiqué,
+    lesquels connaissent votre identité~?
+  \item Parmi les divers acteurs avec lesquels vous avez communiqué,
+    lesquels connaissent l'identité du destinataire~?
+  \item Parmi les divers acteurs avec lesquels vous avez communiqué,
+    lesquels connaissent le contenu du message et de sa réponse~?
+  \item Que faudrait-il changer aux manipulations que vous avez
+    effectuées si vous souhaitiez mettre en place un chiffrement dit
+    \og de bout en bout\fg entre votre destinataire et vous (comme
+    dans le cas d'une communication HTTPS)~?
+  \end{itemize}
+
+  
+		
+  %\bibliographystyle{alpha}
+  %\bibliography{biblio}
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% ispell-local-dictionary: "francais"
+%%% End: 
