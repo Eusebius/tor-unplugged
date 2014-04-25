@@ -1,4 +1,4 @@
-tor-unplugged
+Tor Unplugged
 =============
 
 Pedagogical kit for a hands-on, computer-less discovery of (a simplified version of) the Tor protocol.
