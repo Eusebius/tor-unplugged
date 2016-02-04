@@ -44,8 +44,11 @@
 \makeatother
 
 
-\newcommand{\fiche}[1]{\cleardoublepage {\huge \centerline{\textbf{#1}}\centerline{~}}}
+\newcommand{\fiche}[1]{\cleardoublepage \setcounter{section}{0}{\huge \centerline{\textbf{#1}}\centerline{~}}}
 
+%\makeatletter
+%\@addtoreset{section}{fiche}
+%\makeatother
 
 \begin{document}
   
